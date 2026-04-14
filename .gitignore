@@ -1,1 +1,7 @@
 .vercel
+.DS_Store
+.env
+.env.*
+*.log
+node_modules/
+reviews.json
