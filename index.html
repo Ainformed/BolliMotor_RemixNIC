@@ -93,6 +93,16 @@
         .btn-glow:hover::before { opacity: 1; }
         .btn-glow:hover { box-shadow: 0 8px 30px rgba(37, 99, 235, 0.3); }
 
+        /* Nullstill sittende hover-state på touch-enheter */
+        @media (hover: none) {
+            .ring-oss-btn:hover {
+                border-color: rgb(226, 232, 240) !important;
+                color: rgb(30, 41, 59) !important;
+                box-shadow: none !important;
+                transform: none !important;
+            }
+        }
+
         /* Testimonial quote mark */
         .quote-mark {
             font-family: 'Oswald', sans-serif;
@@ -419,7 +429,7 @@
                             <i class="fa-solid fa-wrench text-sm transition-transform duration-300 group-hover:rotate-12"></i>
                             Book Service
                         </a>
-                        <a href="tel:+4771295872" onclick="this.blur()" class="group inline-flex items-center justify-center gap-3 bg-white text-slate-800 font-semibold text-base px-8 py-4 rounded-2xl border border-slate-200 hover:border-blue-600 hover:text-blue-600 focus:outline-none transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
+                        <a href="tel:+4771295872" class="ring-oss-btn group inline-flex items-center justify-center gap-3 bg-white text-slate-800 font-semibold text-base px-8 py-4 rounded-2xl border border-slate-200 transition-all duration-300 hover:border-blue-600 hover:text-blue-600 hover:shadow-lg hover:-translate-y-0.5">
                             <i class="fa-solid fa-phone text-sm text-blue-600"></i>
                             Ring oss
                         </a>
