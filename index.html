@@ -93,13 +93,19 @@
         .btn-glow:hover::before { opacity: 1; }
         .btn-glow:hover { box-shadow: 0 8px 30px rgba(37, 99, 235, 0.3); }
 
-        /* Nullstill sittende hover-state på touch-enheter */
+        /* Nullstill sittende hover-state på touch-enheter, men gi kort tap-feedback */
         @media (hover: none) {
             .ring-oss-btn:hover {
                 border-color: rgb(226, 232, 240) !important;
                 color: rgb(30, 41, 59) !important;
                 box-shadow: none !important;
                 transform: none !important;
+            }
+            .ring-oss-btn:active {
+                background-color: rgb(239, 246, 255) !important;
+                border-color: rgb(37, 99, 235) !important;
+                transform: scale(0.98) !important;
+                transition: all 0.1s ease !important;
             }
         }
 
