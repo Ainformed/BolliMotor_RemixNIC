@@ -1,0 +1,193 @@
+/* ============================================================
+   BOLLI MOTOR — TEMASYSTEM (delt mellom alle sider)
+   ------------------------------------------------------------
+   BYTTE FARGE FOR ET NYTT VERKSTED (i koden):
+   Endre de fem RGB-verdiene under "AKTIVT MERKE".
+   (rgb-kanaler adskilt med mellomrom, f.eks. 37 99 235)
+
+   Eller bruk velgeren nede i hjørnet for å teste live:
+   - Aksentfarge (8 valg)
+   - Bakgrunnstone (4 valg)
+   - Lys / mørk modus
+   ============================================================ */
+
+:root {
+    /* ---- AKTIVT MERKE (standard = blå) ---- */
+    --brand-100: 219 234 254;   /* lys tint (ikon-bakgrunn)     */
+    --brand-400: 96 165 250;    /* lys aksent                   */
+    --brand-500: 59 130 246;    /* aksent                       */
+    --brand-600: 37 99 235;     /* primær (knapper, lenker)     */
+    --brand-700: 29 78 216;     /* hover / mørk                 */
+
+    /* ---- LYSE FLATER (light mode, standard "Hvit") ---- */
+    --bg:            #ffffff;
+    --surface:       #ffffff;   /* kort                          */
+    --surface-2:     #f8fafc;   /* annenhver seksjon             */
+    --surface-hover: #ffffff;
+    --text:          #0f172a;
+    --text-muted:    #64748b;
+    --text-soft:     #475569;
+    --text-faint:    #94a3b8;
+    --border:        #eef2f7;
+    --border-strong: #e2e8f0;
+    --header-bg:     rgba(255,255,255,1);
+    --header-bg-scrolled: rgba(255,255,255,0.97);
+
+    --hero-bg: linear-gradient(160deg, #ffffff 0%, #f6f9fc 55%, #eef3f9 100%);
+    --dot-color: rgba(15,23,42,0.035);
+}
+
+/* ============================================================
+   AKSENTFARGER (presets)
+   ============================================================ */
+:root[data-palette="blue"]   { --brand-100:219 234 254; --brand-400:96 165 250; --brand-500:59 130 246; --brand-600:37 99 235;  --brand-700:29 78 216; }
+:root[data-palette="red"]    { --brand-100:254 226 226; --brand-400:248 113 113; --brand-500:239 68 68;  --brand-600:220 38 38;  --brand-700:185 28 28; }
+:root[data-palette="green"]  { --brand-100:220 252 231; --brand-400:74 222 128;  --brand-500:34 197 94;  --brand-600:22 163 74;  --brand-700:21 128 61; }
+:root[data-palette="orange"] { --brand-100:255 237 213; --brand-400:251 146 60;  --brand-500:249 115 22; --brand-600:234 88 12;  --brand-700:194 65 12; }
+:root[data-palette="teal"]   { --brand-100:204 251 241; --brand-400:45 212 191;  --brand-500:20 184 166; --brand-600:13 148 136; --brand-700:15 118 110; }
+:root[data-palette="purple"] { --brand-100:237 233 254; --brand-400:167 139 250; --brand-500:139 92 246; --brand-600:124 58 237; --brand-700:109 40 217; }
+:root[data-palette="amber"]  { --brand-100:254 243 199; --brand-400:251 191 36;  --brand-500:245 158 11; --brand-600:217 119 6;  --brand-700:180 83 9;  }
+:root[data-palette="slate"]  { --brand-100:226 232 240; --brand-400:100 116 139; --brand-500:71 85 105;  --brand-600:51 65 85;   --brand-700:30 41 59;  }
+/* ---- Raffinerte, dempede blåtoner (diskret + sterk kontrast på lyst) ---- */
+:root[data-palette="ink"]    { --brand-100:223 231 242; --brand-400:111 139 173; --brand-500:74 103 138; --brand-600:45 74 109;  --brand-700:30 51 76;  }
+:root[data-palette="denim"]  { --brand-100:219 230 242; --brand-400:113 149 189; --brand-500:69 109 156; --brand-600:46 84 128;  --brand-700:33 61 95;  }
+:root[data-palette="steel"]  { --brand-100:223 230 235; --brand-400:120 145 163; --brand-500:82 108 128; --brand-600:55 79 97;   --brand-700:39 58 73;  }
+
+/* ============================================================
+   BAKGRUNNSTONER (light mode) — endrer flater, ikke aksent
+   (Mørk modus overstyrer disse lenger ned.)
+   ============================================================ */
+:root[data-surface="warm"] {
+    --bg:#faf8f4; --surface:#ffffff; --surface-2:#efece4; --surface-hover:#ffffff;
+    --border:#e8e3d9; --border-strong:#ddd6c8;
+    --header-bg:rgba(250,248,244,1); --header-bg-scrolled:rgba(250,248,244,0.97);
+    --hero-bg: linear-gradient(160deg, #fdfcfa 0%, #f4f0e8 55%, #ece6da 100%);
+    --dot-color: rgba(70,58,40,0.04);
+}
+:root[data-surface="sand"] {
+    --bg:#f7f2ea; --surface:#fffdf9; --surface-2:#ece3d4; --surface-hover:#fffdf9;
+    --border:#e4dccb; --border-strong:#d8cfba;
+    --header-bg:rgba(247,242,234,1); --header-bg-scrolled:rgba(247,242,234,0.97);
+    --hero-bg: linear-gradient(160deg, #fdfaf4 0%, #f2ebdd 55%, #e8dfcc 100%);
+    --dot-color: rgba(90,70,40,0.045);
+}
+:root[data-surface="cool"] {
+    --bg:#fbfcfe; --surface:#ffffff; --surface-2:#eef2f9; --surface-hover:#ffffff;
+    --border:#e4eaf3; --border-strong:#d6deec;
+    --header-bg:rgba(251,252,254,1); --header-bg-scrolled:rgba(251,252,254,0.97);
+    --hero-bg: linear-gradient(160deg, #ffffff 0%, #eef3fb 55%, #e2eaf6 100%);
+    --dot-color: rgba(30,50,90,0.045);
+}
+:root[data-surface="mist"] {
+    --bg:#f4f6f8; --surface:#ffffff; --surface-2:#e9edf2; --surface-hover:#ffffff;
+    --border:#dfe4ea; --border-strong:#d2d8e0;
+    --header-bg:rgba(244,246,248,1); --header-bg-scrolled:rgba(244,246,248,0.97);
+    --hero-bg: linear-gradient(160deg, #fbfcfd 0%, #eef1f5 55%, #e4e8ee 100%);
+    --dot-color: rgba(15,23,42,0.05);
+}
+
+/* ============================================================
+   DARK MODE — vinner over bakgrunnstoner (står sist)
+   ============================================================ */
+:root[data-theme="dark"] {
+    --bg:            #0b1120;
+    --surface:       #141d30;
+    --surface-2:     #0e1626;
+    --surface-hover: #1a2742;
+    --text:          #e8edf6;
+    --text-muted:    #94a3b8;
+    --text-soft:     #aeb9cb;
+    --text-faint:    #6b7689;
+    --border:        rgba(255,255,255,0.07);
+    --border-strong: rgba(255,255,255,0.10);
+    --header-bg:     rgba(11,17,32,0.85);
+    --header-bg-scrolled: rgba(11,17,32,0.92);
+
+    --hero-bg: linear-gradient(160deg, #0b1120 0%, #0d1626 55%, #101c33 100%);
+    --dot-color: rgba(255,255,255,0.035);
+}
+/* Mørk modus bruker ÉN ren, nøytral navy-slate flate uansett bakgrunnstone.
+   (Bakgrunnstonene gir variasjon kun i lys modus — i dark holdes alt rent,
+   aldri brunt.) Alle fire peker på samme rene mørke palett som basis. */
+:root[data-theme="dark"][data-surface="warm"],
+:root[data-theme="dark"][data-surface="sand"],
+:root[data-theme="dark"][data-surface="mist"],
+:root[data-theme="dark"][data-surface="cool"] {
+    --bg:#0b1120; --surface:#141d30; --surface-2:#0e1626; --surface-hover:#1a2742;
+    --hero-bg: linear-gradient(160deg, #0b1120 0%, #0d1626 55%, #101c33 100%);
+}
+
+/* ============================================================
+   FLATE-MAPPING — gjør Tailwind-klassene tema-bevisste
+   ============================================================ */
+html, body { background-color: var(--bg); }
+body { color: var(--text); transition: background-color .4s ease, color .4s ease; }
+
+.bg-white            { background-color: var(--surface) !important; }
+.bg-slate-50         { background-color: var(--surface-2) !important; }
+.service-card:hover  { background: var(--surface-hover) !important; }
+
+.border-slate-100    { border-color: var(--border) !important; }
+.border-slate-200    { border-color: var(--border-strong) !important; }
+
+.text-midnight       { color: var(--text) !important; }
+.text-slate-900      { color: var(--text) !important; }
+.text-slate-800      { color: var(--text) !important; }
+.text-slate-600      { color: var(--text-soft) !important; }
+.text-slate-500      { color: var(--text-muted) !important; }
+.text-slate-400      { color: var(--text-faint) !important; }
+
+.process-line        { background-color: var(--border-strong) !important; }
+
+#header { background-color: var(--header-bg) !important; backdrop-filter: blur(10px); }
+.header-scrolled {
+    background: var(--header-bg-scrolled) !important;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 20px rgba(0,0,0,0.06);
+}
+
+.logo-text { color: var(--text); }
+.logo-accent { color: rgb(var(--brand-600)); }
+
+.rule-accent       { width: 60px; height: 3px; background: rgb(var(--brand-600)); }
+.rule-accent-white { width: 60px; height: 3px; background: rgb(var(--brand-400)); }
+.quote-mark        { color: rgb(var(--brand-600) / 0.08); }
+
+.hero-section { background: var(--hero-bg); }
+.dot-pattern  { background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px); background-size: 26px 26px; }
+
+.btn-glow:hover { box-shadow: 0 8px 30px rgb(var(--brand-600) / 0.30); }
+.scroll-progress { background: linear-gradient(90deg, rgb(var(--brand-600)), rgb(var(--brand-400))); }
+
+/* Footer / kontakt — alltid mørk */
+.footer-dark { background-color: #0f172a; }
+:root[data-theme="dark"] .footer-dark { background-color: #080d18; }
+
+/* ============================================================
+   TEMA-KONTROLL (flytende dock nede til høyre)
+   ============================================================ */
+.theme-dock {
+    position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 70;
+    display: flex; align-items: center; gap: 0.5rem;
+}
+.theme-dock-btn {
+    width: 46px; height: 46px; border-radius: 9999px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--surface); color: var(--text);
+    border: 1px solid var(--border-strong);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.12);
+    cursor: pointer; font-size: 1.05rem;
+    transition: transform .25s cubic-bezier(.16,1,.3,1), color .25s ease, border-color .25s ease;
+}
+.theme-dock-btn:hover { transform: translateY(-2px); color: rgb(var(--brand-600)); border-color: rgb(var(--brand-400)); }
+.theme-dock-btn:active { transform: scale(.94); }
+
+@media (max-width: 640px) {
+    .theme-dock { right: 1rem; bottom: 1rem; }
+    .theme-dock-btn { width: 42px; height: 42px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body { transition: none; }
+    .theme-dock-btn { transition: none; }
+}

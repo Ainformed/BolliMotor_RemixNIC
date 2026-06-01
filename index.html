@@ -9,8 +9,8 @@
     <link rel="canonical" href="https://bollimotor.no/">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/images/bollimotor-logo.png">
-    <link rel="apple-touch-icon" href="/images/bollimotor-logo.png">
+    <link rel="icon" type="image/png" href="images/bollimotor-logo.png">
+    <link rel="apple-touch-icon" href="images/bollimotor-logo.png">
 
     <!-- Open Graph / Facebook / iMessage / Slack -->
     <meta property="og:type" content="website">
@@ -27,11 +27,17 @@
     <meta name="twitter:title" content="Bolli Motor | Moderne Mekanikk. Gammeldagse Verdier.">
     <meta name="twitter:description" content="Familieverksted p&aring; Lyngstad siden 1988. Personbil, tungbil, anlegg og landbruk.">
     <meta name="twitter:image" content="https://bollimotor.no/images/bollimotor-logo.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Temasystem: bruk lagret tema før første maling -->
+    <script src="theme.js"></script>
+    <link rel="stylesheet" href="theme.css">
+
     <script>
         tailwind.config = {
             theme: {
@@ -39,13 +45,14 @@
                     colors: {
                         midnight: '#0B1120',
                         'midnight-light': '#0f172a',
-                        slate: {
-                            accent: '#64748b',
-                            muted: '#94a3b8',
-                            soft: '#cbd5e1',
+                        /* Merkefargen styres av CSS-variabler (se theme.css) */
+                        blue: {
+                            100: 'rgb(var(--brand-100) / <alpha-value>)',
+                            400: 'rgb(var(--brand-400) / <alpha-value>)',
+                            500: 'rgb(var(--brand-500) / <alpha-value>)',
+                            600: 'rgb(var(--brand-600) / <alpha-value>)',
+                            700: 'rgb(var(--brand-700) / <alpha-value>)',
                         },
-                        steel: '#e2e8f0',
-                        warm: '#f8fafc',
                     },
                     fontFamily: {
                         display: ['Oswald', 'sans-serif'],
@@ -59,7 +66,6 @@
         * { font-family: 'Inter', sans-serif; }
         h1, h2, h3, h4, .font-display { font-family: 'Oswald', sans-serif; }
 
-        /* Smooth scroll */
         html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 
         /* Reveal animations */
@@ -68,201 +74,131 @@
             transform: translateY(40px);
             transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
         .reveal-delay-1 { transition-delay: 0.1s; }
         .reveal-delay-2 { transition-delay: 0.2s; }
         .reveal-delay-3 { transition-delay: 0.3s; }
         .reveal-delay-4 { transition-delay: 0.4s; }
         .reveal-delay-5 { transition-delay: 0.5s; }
 
-        /* Button hover glow */
-        .btn-glow {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
+        /* Button hover glow (farge i theme.css) */
+        .btn-glow { position: relative; overflow: hidden; transition: all 0.3s ease; }
         .btn-glow::before {
-            content: '';
-            position: absolute;
-            inset: 0;
+            content: ''; position: absolute; inset: 0;
             background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            opacity: 0; transition: opacity 0.3s ease;
         }
         .btn-glow:hover::before { opacity: 1; }
-        .btn-glow:hover { box-shadow: 0 8px 30px rgba(37, 99, 235, 0.3); }
 
-        /* Nullstill sittende hover-state på touch-enheter, men gi kort tap-feedback */
         @media (hover: none) {
             .ring-oss-btn:hover {
-                border-color: rgb(226, 232, 240) !important;
-                color: rgb(30, 41, 59) !important;
+                border-color: var(--border-strong) !important;
+                color: var(--text) !important;
                 box-shadow: none !important;
                 transform: none !important;
             }
             .ring-oss-btn:active {
-                background-color: rgb(239, 246, 255) !important;
-                border-color: rgb(37, 99, 235) !important;
+                border-color: rgb(var(--brand-600)) !important;
                 transform: scale(0.98) !important;
                 transition: all 0.1s ease !important;
             }
         }
 
-        /* Testimonial quote mark */
+        /* Testimonial quote mark (farge i theme.css) */
         .quote-mark {
             font-family: 'Oswald', sans-serif;
-            font-size: 8rem;
-            line-height: 0;
-            color: rgba(37, 99, 235, 0.08);
-            position: absolute;
-            top: 2rem;
-            left: 1rem;
+            font-size: 8rem; line-height: 0;
+            position: absolute; top: 2rem; left: 1rem;
         }
 
-        /* Mobile nav */
-        .mobile-nav {
-            transform: translateX(100%);
-            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .mobile-nav.open {
-            transform: translateX(0);
-        }
-
-        /* Header shrink on scroll */
-        .header-scrolled {
-            background: rgba(255, 255, 255, 0.97) !important;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 1px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        /* Logo styling */
+        /* Logo (farge i theme.css) */
         .logo-text {
             font-family: 'Alfa Slab One', serif;
             text-transform: uppercase;
             letter-spacing: 0.08em;
             line-height: 1;
-            color: #0f172a;
             font-size: 1.65rem;
-            text-shadow: none;
         }
 
-        /* Horizontal rule accent */
-        .rule-accent {
-            width: 60px;
-            height: 3px;
-            background: #2563eb;
-        }
-        .rule-accent-white {
-            width: 60px;
-            height: 3px;
-            background: #60a5fa;
-        }
+        /* Mobile nav */
+        .mobile-nav { transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+        .mobile-nav.open { transform: translateX(0); }
 
         /* Floating SoMe bar */
-        .some-float a {
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
-        }
+        .some-float a { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease; }
         .some-float a:hover { transform: translateX(4px); }
         .some-float .some-fb:hover { background-color: #1877F2; }
         .some-float .some-ig:hover { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
         .some-float a:hover i { color: white !important; }
 
-        /* Footer SoMe hover */
         .footer-some .some-fb:hover { background-color: #1877F2 !important; }
         .footer-some .some-ig:hover { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888) !important; }
         .footer-some a:hover i { color: white !important; }
 
+        /* Hero (bakgrunn i theme.css via .hero-section) */
+        .hero-section { min-height: calc(100vh - 80px); position: relative; }
 
-        /* Hero */
-        .hero-section {
-            min-height: calc(100vh - 80px);
-            background: linear-gradient(135deg, #f8fafc 0%, #eef2f7 50%, #e0e7ef 100%);
-            position: relative;
-        }
+        .hero-image-wrapper { border-radius: 1.2rem; overflow: hidden; }
 
-        /* Animated gradient mesh */
-        @keyframes meshMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        .hero-mesh {
-            position: absolute; inset: 0;
-            background: linear-gradient(
-                -45deg,
-                rgba(59,130,246,0.06),
-                rgba(147,197,253,0.08),
-                rgba(219,234,254,0.04),
-                rgba(59,130,246,0.06)
-            );
-            background-size: 400% 400%;
-            animation: meshMove 12s ease infinite;
-        }
+        @keyframes kenBurns { 0% { transform: scale(1); } 100% { transform: scale(1.06); } }
+        .hero-image-wrapper img { animation: kenBurns 20s ease-in-out alternate infinite; }
 
-        .hero-image-wrapper {
-            border-radius: 1.2rem;
-            overflow: hidden;
-        }
-
-        /* Ken Burns zoom on image */
-        @keyframes kenBurns {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.06); }
-        }
-        .hero-image-wrapper img {
-            animation: kenBurns 20s ease-in-out alternate infinite;
-        }
-        @keyframes heroFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
+        @keyframes heroFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
         .hero-float { animation: heroFloat 6s ease-in-out infinite; }
 
-        @keyframes blobPulse {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.04) rotate(2deg); }
-        }
+        @keyframes blobPulse { 0%, 100% { transform: scale(1) rotate(0deg); } 50% { transform: scale(1.03) rotate(2deg); } }
         .hero-blob {
             position: absolute;
             width: 105%; height: 105%; top: -2.5%; left: -2.5%;
-            background: radial-gradient(ellipse at 30% 50%, rgba(59,130,246,0.12) 0%, rgba(37,99,235,0.06) 50%, transparent 80%);
+            background: radial-gradient(ellipse at 30% 50%, rgb(var(--brand-500) / 0.10) 0%, rgb(var(--brand-600) / 0.05) 50%, transparent 80%);
             border-radius: 40% 60% 55% 45% / 55% 40% 60% 45%;
             animation: blobPulse 8s ease-in-out infinite;
             z-index: -1;
         }
 
-        @keyframes heroSlideIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* ===== Modern hero: ett bilde + flytende UI-kort ===== */
+        .hero-frame { position: relative; }
+        .hero-image-wrapper {
+            border-radius: 1.4rem;
+            box-shadow: 0 34px 70px -28px rgba(15,23,42,0.45), 0 0 0 1px var(--border-strong);
         }
-        @keyframes heroSlideRight {
-            from { opacity: 0; transform: translateX(-40px); }
-            to { opacity: 1; transform: translateX(0); }
+        .hero-image-wrapper img { border-radius: 1.4rem !important; }
+
+        .hero-card {
+            position: absolute; z-index: 20;
+            background: var(--surface);
+            border: 1px solid var(--border-strong);
+            border-radius: 16px;
+            box-shadow: 0 18px 44px -12px rgba(15,23,42,0.30);
         }
-        @keyframes heroImageIn {
-            from { opacity: 0; transform: scale(0.96) translateY(16px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
+        @keyframes floatA { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+        @keyframes floatB { 0%,100% { transform: translateY(0); } 50% { transform: translateY(7px); } }
+        /* Alltid forankret nederst til venstre inne i bildet — samme relative plass uansett skjermbredde */
+        .hero-card-rating { bottom: 1.25rem; left: 1.25rem; padding: .8rem 1.05rem; animation: floatB 8.5s ease-in-out infinite; }
+        .hero-card-icon {
+            width: 2.4rem; height: 2.4rem; border-radius: 11px; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            background: rgb(var(--brand-600));
         }
+        .hero-live-dot { width: .5rem; height: .5rem; border-radius: 9999px; background: #16a34a; box-shadow: 0 0 0 0 rgba(22,163,74,.5); animation: livePulse 2s ease-in-out infinite; }
+        @keyframes livePulse { 0% { box-shadow: 0 0 0 0 rgba(22,163,74,.45);} 70%{ box-shadow: 0 0 0 6px rgba(22,163,74,0);} 100%{ box-shadow:0 0 0 0 rgba(22,163,74,0);} }
+
+
+        @keyframes heroSlideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes heroSlideRight { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes heroImageIn { from { opacity: 0; transform: scale(0.96) translateY(16px); } to { opacity: 1; transform: scale(1) translateY(0); } }
         .hero-enter { opacity: 0; animation: heroSlideIn 0.9s cubic-bezier(0.16,1,0.3,1) forwards; }
         .hero-enter-right { opacity: 0; animation: heroSlideRight 0.9s cubic-bezier(0.16,1,0.3,1) forwards; }
         .hero-enter-img { opacity: 0; animation: heroImageIn 1s cubic-bezier(0.16,1,0.3,1) forwards; }
-        .hero-d1 { animation-delay: 0.1s; }
-        .hero-d2 { animation-delay: 0.25s; }
-        .hero-d3 { animation-delay: 0.4s; }
-        .hero-d4 { animation-delay: 0.55s; }
-        .hero-d5 { animation-delay: 0.7s; }
+        .hero-d1 { animation-delay: 0.1s; } .hero-d2 { animation-delay: 0.25s; } .hero-d3 { animation-delay: 0.4s; }
+        .hero-d4 { animation-delay: 0.55s; } .hero-d5 { animation-delay: 0.7s; }
 
-        @keyframes rotateWord {
-            0%, 18% { opacity: 1; transform: translateY(0); }
-            22%, 100% { opacity: 0; transform: translateY(-100%); }
-        }
-        .rotating-words { position: relative; display: inline-block; height: 1.2em; overflow: hidden; vertical-align: bottom; }
-        .rotating-words span {
-            display: block; position: absolute; top: 0; left: 0;
-            opacity: 0; animation: rotateWord 10s linear infinite;
+        @keyframes rotateWord { 0%, 18% { opacity: 1; transform: translateY(0); } 22%, 100% { opacity: 0; transform: translateY(-100%); } }
+        .rotating-words { position: relative; display: inline-block; height: 1.2em; overflow: hidden; vertical-align: bottom; white-space: nowrap; }
+        .rotating-words span { display: block; position: absolute; top: 0; left: 0; opacity: 0; white-space: nowrap; animation: rotateWord 10s linear infinite; }
+        /* Skalér heading med viewport slik at lengste rullende ord (TUNGTRANSPORT) alltid får plass på én linje */
+        @media (min-width: 1024px) {
+            .hero-title { font-size: clamp(2.25rem, 3.5vw, 3.75rem); }
         }
         .rotating-words span:nth-child(1) { animation-delay: 0s; }
         .rotating-words span:nth-child(2) { animation-delay: 2s; }
@@ -271,99 +207,131 @@
         .rotating-words span:nth-child(5) { animation-delay: 8s; }
 
         /* Service cards */
-        .service-card {
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            cursor: default;
-        }
+        .service-card { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: default; }
         .service-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
-            border-color: #93bbfd;
-            background: white;
+            box-shadow: 0 20px 40px rgb(var(--brand-600) / 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+            border-color: rgb(var(--brand-400)) !important;
         }
-        .service-card:hover .service-icon {
-            transform: scale(1.1);
-            background: #2563eb;
-        }
-        .service-card:hover .service-icon i {
-            color: white !important;
-        }
-        .service-icon {
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        .service-card:hover .service-icon { transform: scale(1.1); background: rgb(var(--brand-600)) !important; }
+        .service-card:hover .service-icon i { color: white !important; }
+        .service-icon { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
 
         /* Steps hover */
-        .step-item {
-            transition: all 0.3s ease;
+        .step-item { transition: all 0.3s ease; }
+        .step-item:hover { transform: translateY(-4px); }
+        .step-circle, .step-circle i { transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        /* ===== "Slik fungerer det" — flere stiler ===== */
+        .hiw-switch { display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem; padding: .3rem; width: max-content; max-width: 100%; margin: 0 auto;
+            background: var(--surface-2); border: 1px solid var(--border-strong); border-radius: 9999px; }
+        .hiw-opt { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: .08em; font-size: .72rem; font-weight: 600;
+            color: var(--text-muted); padding: .5rem 1rem; border-radius: 9999px; cursor: pointer; background: transparent; border: 0; transition: all .25s ease; }
+        .hiw-opt:hover { color: var(--text); }
+        .hiw-opt[aria-pressed="true"] { background: rgb(var(--brand-600)); color: #fff; box-shadow: 0 4px 12px rgb(var(--brand-600) / .28); }
+
+        .hiw-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.75rem 1.5rem; }
+        @media (min-width: 768px) { .hiw-grid { grid-template-columns: repeat(4, 1fr); gap: 2rem 1rem; } }
+        .hiw-step { display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; }
+        .hiw-icon-wrap { position: relative; display: inline-flex; z-index: 1; }
+        .hiw-icon { width: 3rem; height: 3rem; display: flex; align-items: center; justify-content: center; transition: transform .3s cubic-bezier(.16,1,.3,1), background .3s ease, color .3s ease; }
+        .hiw-icon i { font-size: 1rem; transition: color .3s ease; }
+        .hiw-num { font-family: 'Oswald', sans-serif; font-weight: 700; }
+        .hiw-title { font-family: 'Oswald', sans-serif; text-transform: uppercase; font-weight: 600; letter-spacing: .02em; font-size: 1.05rem; color: var(--text); }
+        .hiw-sub { color: var(--text-muted); font-size: .875rem; margin-top: .4rem; max-width: 22ch; }
+        .hiw-body { display: flex; flex-direction: column; align-items: inherit; }
+
+        /* connector line (kun "circles") */
+        .process-line { display: none; z-index: 0; }
+
+        /* badge for circles + soft */
+        [data-hiw="circles"] .hiw-num, [data-hiw="soft"] .hiw-num {
+            position: absolute; top: -.5rem; right: -.5rem; width: 1.5rem; height: 1.5rem; border-radius: 9999px;
+            background: rgb(var(--brand-600)); color: #fff; font-size: .72rem; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 0 3px var(--surface); z-index: 5; }
+
+        /* --- Variant: Sirkler --- */
+        [data-hiw="circles"] .hiw-icon-wrap { margin-bottom: 1.25rem; }
+        [data-hiw="circles"] .hiw-icon { border-radius: 9999px; background: rgb(var(--brand-600)); box-shadow: 0 6px 16px rgb(var(--brand-600) / .25); }
+        [data-hiw="circles"] .hiw-icon i { color: #fff; }
+        @media (min-width: 768px) {
+            [data-hiw="circles"] .process-line { display: block; position: absolute; top: 1.5rem; left: 12.5%; right: 12.5%; height: 1px; }
         }
-        .step-item:hover {
-            transform: translateY(-4px);
+        [data-hiw="circles"] .hiw-step:hover { transform: translateY(-4px); }
+        [data-hiw="circles"] .hiw-step:hover .hiw-icon { transform: scale(1.08); background: rgb(var(--brand-700)); }
+
+        /* --- Variant: Tone (tinted rounded square) --- */
+        [data-hiw="soft"] .hiw-icon-wrap { margin-bottom: 1.25rem; }
+        [data-hiw="soft"] .hiw-icon { border-radius: 1rem; background: rgb(var(--brand-600)); box-shadow: 0 6px 16px rgb(var(--brand-600) / .25); }
+        [data-hiw="soft"] .hiw-icon i { color: #fff; }
+        @media (min-width: 768px) {
+            [data-hiw="soft"] .process-line { display: block; position: absolute; top: 1.5rem; left: 12.5%; right: 12.5%; height: 1px; }
         }
-        .step-item:hover .step-circle {
-            transform: scale(1.15);
-            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
-        }
-        .step-circle {
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        [data-hiw="soft"] .hiw-step:hover { transform: translateY(-4px); }
+        [data-hiw="soft"] .hiw-step:hover .hiw-icon { transform: scale(1.08); background: rgb(var(--brand-700)); }
+        [data-hiw="soft"] .hiw-step:hover .hiw-icon i { color: #fff; }
+
+        /* --- Variant: Kort (cards) --- */
+        [data-hiw="cards"] .hiw-step { background: var(--surface); border: 1px solid var(--border-strong); border-radius: 1rem; padding: 1.6rem 1.4rem; align-items: flex-start; text-align: left; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+        [data-hiw="cards"] .hiw-icon-wrap { margin-bottom: 1rem; }
+        [data-hiw="cards"] .hiw-icon { border-radius: .85rem; background: rgb(var(--brand-600)); }
+        [data-hiw="cards"] .hiw-icon i { color: #fff; }
+        [data-hiw="cards"] .hiw-num { position: absolute; top: 1.1rem; right: 1.3rem; font-size: 2.1rem; line-height: 1; color: rgb(var(--brand-600) / .16); }
+        [data-hiw="cards"] .hiw-sub { max-width: none; }
+        [data-hiw="cards"] .hiw-step:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,.08); border-color: rgb(var(--brand-400)); }
+
+        /* --- Variant: Minimal (big number, bare icon) --- */
+        [data-hiw="minimal"] .hiw-icon-wrap { flex-direction: column-reverse; align-items: center; gap: .35rem; margin-bottom: .9rem; }
+        [data-hiw="minimal"] .hiw-icon { width: auto; height: auto; background: transparent; }
+        [data-hiw="minimal"] .hiw-icon i { color: rgb(var(--brand-600)); font-size: 1.15rem; }
+        [data-hiw="minimal"] .hiw-num { position: static; font-size: 2.4rem; line-height: 1; color: rgb(var(--brand-600)); }
+        [data-hiw="minimal"] .hiw-step::after { content: ''; width: 1.75rem; height: 2px; background: rgb(var(--brand-600) / .35); margin-top: .9rem; border-radius: 2px; }
+        [data-hiw="minimal"] .hiw-step:hover { transform: translateY(-4px); }
 
         /* Testimonial cards */
-        .testimonial-card {
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .testimonial-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
-        }
+        .testimonial-card { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .testimonial-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.10); }
 
-        /* Scroll progress bar */
+        /* Scroll progress bar (farge i theme.css) */
         .scroll-progress {
-            position: fixed;
-            top: 80px;
-            left: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #2563eb, #3b82f6);
-            z-index: 49;
-            transform-origin: left;
-            transform: scaleX(0);
+            position: fixed; top: 80px; left: 0; height: 3px;
+            z-index: 49; transform-origin: left; transform: scaleX(0);
         }
 
-        /* Respect reduced motion */
         @media (prefers-reduced-motion: reduce) {
             .reveal { transition: none; opacity: 1; transform: none; }
-            .hero-float { animation: none; }
-            .hero-blob { animation: none; }
+            .hero-float, .hero-blob { animation: none; }
             .hero-enter, .hero-enter-right, .hero-enter-img { animation: none; opacity: 1; }
             .rotating-words span { animation: none; opacity: 0; }
             .rotating-words span:first-child { opacity: 1; position: relative; }
             .service-card:hover, .step-item:hover, .testimonial-card:hover { transform: none; }
-            .hero-mesh { animation: none; }
             .hero-image-wrapper img { animation: none; }
+            .hero-card-rating, .hero-card-notif, .hero-live-dot { animation: none; }
         }
     </style>
 </head>
-<body class="bg-white text-midnight antialiased">
+<body class="text-midnight antialiased">
 
     <!-- Scroll progress bar -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
     <!-- ============ FLOATING SOME BAR (desktop) ============ -->
-    <div class="some-float hidden lg:flex fixed left-0 top-1/2 -translate-y-1/2 z-40 flex-col gap-0 rounded-r-xl overflow-hidden bg-slate-900/80 backdrop-blur-sm shadow-lg">
-        <a href="https://www.facebook.com/profile.php?id=100054575164415" target="_blank" rel="noopener" class="some-fb w-11 h-11 flex items-center justify-center" aria-label="Facebook">
+    <div class="some-float hidden lg:flex fixed left-5 bottom-5 z-40 flex-row gap-2">
+        <a href="https://www.facebook.com/profile.php?id=100054575164415" target="_blank" rel="noopener" class="some-fb w-11 h-11 flex items-center justify-center rounded-full bg-slate-900/80 backdrop-blur-sm shadow-lg" aria-label="Facebook">
             <i class="fa-brands fa-facebook-f text-white/70 text-base"></i>
         </a>
-        <a href="https://www.instagram.com/knut.bolli/" target="_blank" rel="noopener" class="some-ig w-11 h-11 flex items-center justify-center" aria-label="Instagram">
+        <a href="https://www.instagram.com/knut.bolli/" target="_blank" rel="noopener" class="some-ig w-11 h-11 flex items-center justify-center rounded-full bg-slate-900/80 backdrop-blur-sm shadow-lg" aria-label="Instagram">
             <i class="fa-brands fa-instagram text-white/70 text-lg"></i>
         </a>
     </div>
 
     <!-- ============ HEADER ============ -->
-    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-white shadow-sm">
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 shadow-sm">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <!-- Logo -->
                 <a href="/" class="group">
-                    <span class="logo-text">Bolli</span><span class="logo-text" style="color:#2563eb;font-weight:400;margin-left:0.2em;">Motor</span>
+                    <span class="logo-text">Bolli</span><span class="logo-text logo-accent" style="font-weight:400;margin-left:0.2em;">Motor</span>
                 </a>
 
                 <!-- Desktop Nav -->
@@ -372,13 +340,13 @@
                     <a href="om-oss.html" class="text-slate-500 hover:text-slate-900 text-sm font-medium tracking-wide uppercase transition-colors">Om Oss</a>
                     <a href="#testimonials" class="text-slate-500 hover:text-slate-900 text-sm font-medium tracking-wide uppercase transition-colors">Omtaler</a>
                     <a href="#contact" class="text-slate-500 hover:text-slate-900 text-sm font-medium tracking-wide uppercase transition-colors">Kontakt</a>
-                    <a href="#contact" class="btn-glow bg-blue-600 text-white font-semibold text-sm px-6 py-2.5 rounded-lg uppercase tracking-wider hover:bg-blue-700 transition-colors">
-                        Bestill Time
+                    <a href="#min-garasje" class="btn-glow inline-flex items-center gap-1.5 bg-transparent text-blue-600 border border-blue-600 font-semibold text-xs px-4 py-2 rounded-lg uppercase tracking-wide hover:bg-blue-600 hover:text-white transition-colors">
+                        <i class="fa-solid fa-right-to-bracket text-[11px]"></i> Min Garasje
                     </a>
                 </nav>
 
                 <!-- Mobile Hamburger -->
-                <button id="menuBtn" class="lg:hidden text-slate-900 text-2xl" aria-label="&Aring;pne meny">
+                <button id="menuBtn" class="lg:hidden text-2xl text-slate-900" aria-label="&Aring;pne meny">
                     <i class="fa-solid fa-bars"></i>
                 </button>
             </div>
@@ -386,15 +354,15 @@
     </header>
 
     <!-- Mobile Nav Overlay -->
-    <div id="mobileNav" class="mobile-nav fixed inset-0 z-[60] bg-slate-900 flex flex-col justify-center items-center gap-8">
+    <div id="mobileNav" class="mobile-nav fixed inset-0 z-[60] bg-slate-900 flex flex-col justify-center items-start gap-8 px-12">
         <button id="closeMenuBtn" class="absolute top-6 right-6 text-white text-3xl" aria-label="Lukk meny">
             <i class="fa-solid fa-xmark"></i>
         </button>
-        <a href="#services" class="mobile-link font-display text-white text-3xl uppercase tracking-widest hover:text-slate-muted transition-colors">Tjenester</a>
-        <a href="om-oss.html" class="mobile-link font-display text-white text-3xl uppercase tracking-widest hover:text-slate-muted transition-colors">Om Oss</a>
-        <a href="#testimonials" class="mobile-link font-display text-white text-3xl uppercase tracking-widest hover:text-slate-muted transition-colors">Omtaler</a>
-        <a href="#contact" class="mobile-link font-display text-white text-3xl uppercase tracking-widest hover:text-slate-muted transition-colors">Kontakt</a>
-        <a href="#contact" class="mobile-link mt-4 btn-glow bg-blue-600 text-white font-bold text-lg px-10 py-4 rounded-full uppercase tracking-wider">Bestill Time</a>
+        <a href="#services" class="mobile-link font-display text-white text-3xl uppercase tracking-widest transition-colors">Tjenester</a>
+        <a href="om-oss.html" class="mobile-link font-display text-white text-3xl uppercase tracking-widest transition-colors">Om Oss</a>
+        <a href="#testimonials" class="mobile-link font-display text-white text-3xl uppercase tracking-widest transition-colors">Omtaler</a>
+        <a href="#contact" class="mobile-link font-display text-white text-3xl uppercase tracking-widest transition-colors">Kontakt</a>
+        <a href="#min-garasje" class="mobile-link mt-4 btn-glow inline-flex items-center gap-2 bg-transparent text-white border-2 border-blue-500 font-bold text-lg px-10 py-4 rounded-xl uppercase tracking-wider hover:bg-blue-600"><i class="fa-solid fa-right-to-bracket"></i> Min Garasje</a>
         <div class="flex gap-6 mt-8">
             <a href="https://www.facebook.com/profile.php?id=100054575164415" target="_blank" rel="noopener" class="w-12 h-12 rounded-full flex items-center justify-center" style="background-color: #1877F2;" aria-label="Facebook">
                 <i class="fa-brands fa-facebook-f text-white text-lg"></i>
@@ -408,15 +376,14 @@
 
     <!-- ============ HERO ============ -->
     <section id="booking" class="hero-section relative overflow-hidden pt-20 pb-8 lg:pt-0 lg:pb-0">
-        <div class="hero-mesh"></div>
-        <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle, #0f172a 1px, transparent 1px); background-size: 24px 24px;"></div>
+        <div class="dot-pattern absolute inset-0"></div>
 
         <div class="relative lg:pl-8 xl:pl-16 2xl:pl-24 lg:min-h-[calc(100vh-80px)] flex items-center">
             <div class="grid lg:grid-cols-[1fr_1.5fr] gap-6 lg:gap-14 items-center w-full py-6 lg:py-0 px-6 lg:px-0">
 
                 <!-- Left: Content -->
-                <div class="order-2 lg:order-1">
-                    <h1 class="hero-enter-right hero-d2 font-display text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-[1.1] mb-6">
+                <div class="order-2 lg:order-1 lg:mt-24">
+                    <h1 class="hero-title hero-enter-right hero-d2 font-display text-4xl md:text-5xl font-bold uppercase leading-[1.1] mb-6">
                         <span class="text-slate-900">Ditt verksted for</span><br>
                         <span class="rotating-words text-blue-600" style="width: 100%;">
                             <span>personbil</span>
@@ -441,28 +408,32 @@
                             Ring oss
                         </a>
                     </div>
-                    <p class="hero-enter hero-d4 text-sm text-slate-500 mb-8 max-w-lg">
-                        <i class="fa-solid fa-calendar-check text-blue-500 mr-1"></i> Bestill time p&aring; telefon eller e-post &mdash; online booking kommer snart.
+                    <p class="hero-enter hero-d4 text-sm text-slate-500 max-w-lg">
+                        <i class="fa-solid fa-calendar-check text-blue-500 mr-1"></i> Bestill time og deler gjennom v&aring;r bookingportal &mdash; f&oslash;lg status p&aring; jobben, historikk og dine biler inne i Min Garasje.
                     </p>
-
-                    <div class="hero-enter hero-d5 flex items-center gap-5 text-sm text-slate-400">
-                        <div class="flex items-center gap-1.5">
-                            <div class="flex gap-0.5 text-amber-400 text-xs">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                            </div>
-                            <span class="font-semibold text-slate-600" data-count="4.9">0,0</span>
-                            <span>p&aring; Google</span>
-                        </div>
-                        <span class="text-slate-200">|</span>
-                        <span>&AElig;rlig service siden 1988</span>
-                    </div>
                 </div>
 
-                <!-- Right: Image -->
+                <!-- Right: Image (ett bilde + flytende UI-kort) -->
                 <div class="order-1 lg:order-2 relative lg:pr-4">
-                    <div class="hero-enter-img hero-d3 hero-float relative z-10">
-                        <div class="hero-image-wrapper mt-0 lg:mt-24">
-                            <img src="images/workshop-exterior.jpg" alt="Bolli Motor verksted" class="w-full lg:h-[65vh] lg:max-h-[600px] object-cover rounded-t-2xl" loading="eager">
+                    <div class="hero-enter-img hero-d3 relative z-10 mt-0 lg:mt-24">
+                        <div class="hero-frame">
+                            <div class="hero-image-wrapper">
+                                <img src="images/workshop-exterior.jpg" alt="Bolli Motor verksted" class="w-full lg:h-[65vh] lg:max-h-[600px] object-cover" loading="eager">
+                            </div>
+
+                            <!-- Flytende: Google-vurdering -->
+                            <div class="hero-card hero-card-rating hero-enter hero-d4 flex items-center gap-3">
+                                <svg class="w-7 h-7 flex-shrink-0" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                                <div class="leading-tight">
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="font-display font-bold text-lg text-slate-900">4,9</span>
+                                        <span class="flex gap-0.5 text-xs text-amber-400">
+                                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                        </span>
+                                    </div>
+                                    <span class="text-slate-400 text-xs">43 omtaler p&aring; Google</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="hero-blob hidden lg:block"></div>
@@ -474,39 +445,56 @@
     </section>
 
     <!-- ============ SLIK FUNGERER DET ============ -->
-    <div class="py-14 bg-white/80 border-b border-slate-100">
-        <div class="max-w-4xl mx-auto px-6 lg:px-8">
-            <p class="text-center text-xs uppercase tracking-[0.25em] text-slate-400 font-medium mb-8">Slik fungerer det</p>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4 relative">
-                <div class="hidden md:block absolute top-5 left-[calc(12.5%+20px)] right-[calc(12.5%+20px)] h-px bg-slate-200"></div>
+    <div class="py-16 lg:py-20 bg-white border-b border-slate-100">
+        <div class="max-w-5xl mx-auto px-6 lg:px-8">
+            <p class="text-center text-xs uppercase tracking-[0.25em] text-slate-400 font-medium mb-3 reveal">Slik fungerer det</p>
+            <h2 class="text-center font-display text-2xl md:text-3xl font-bold uppercase mb-12 lg:mb-14 reveal">Enkelt med Min Garasje</h2>
 
-                <div class="step-item flex flex-col items-center text-center relative">
-                    <div class="step-circle w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mb-3 shadow-md shadow-blue-600/20 relative z-10">
-                        <i class="fa-solid fa-phone text-sm"></i>
+            <div id="hiwGrid" data-hiw="soft" class="hiw-grid relative">
+                <div class="process-line"></div>
+
+                <div class="hiw-step reveal">
+                    <div class="hiw-icon-wrap">
+                        <div class="hiw-icon"><i class="fa-solid fa-right-to-bracket"></i></div>
+                        <span class="hiw-num">1</span>
                     </div>
-                    <span class="text-slate-800 text-base md:text-sm font-semibold">Ta kontakt</span>
-                    <span class="text-slate-400 text-sm md:text-xs mt-1">Ring eller send e-post</span>
+                    <div class="hiw-body">
+                        <span class="hiw-title">Bestill online</span>
+                        <span class="hiw-sub">Bestill time og deler online</span>
+                    </div>
                 </div>
-                <div class="step-item flex flex-col items-center text-center relative">
-                    <div class="step-circle w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mb-3 shadow-md shadow-blue-600/20 relative z-10">
-                        <i class="fa-solid fa-calendar-check text-sm"></i>
+
+                <div class="hiw-step reveal reveal-delay-1">
+                    <div class="hiw-icon-wrap">
+                        <div class="hiw-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+                        <span class="hiw-num">2</span>
                     </div>
-                    <span class="text-slate-800 text-base md:text-sm font-semibold">Avtal tid</span>
-                    <span class="text-slate-400 text-sm md:text-xs mt-1">Vi finner en tid som passer</span>
+                    <div class="hiw-body">
+                        <span class="hiw-title">Vi bekrefter</span>
+                        <span class="hiw-sub">Vi bekrefter ordren din</span>
+                    </div>
                 </div>
-                <div class="step-item flex flex-col items-center text-center relative">
-                    <div class="step-circle w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mb-3 shadow-md shadow-blue-600/20 relative z-10">
-                        <i class="fa-solid fa-wrench text-sm"></i>
+
+                <div class="hiw-step reveal reveal-delay-2">
+                    <div class="hiw-icon-wrap">
+                        <div class="hiw-icon"><i class="fa-solid fa-wrench"></i></div>
+                        <span class="hiw-num">3</span>
                     </div>
-                    <span class="text-slate-800 text-base md:text-sm font-semibold">Vi jobber</span>
-                    <span class="text-slate-400 text-sm md:text-xs mt-1">Gir beskjed underveis</span>
+                    <div class="hiw-body">
+                        <span class="hiw-title">F&oslash;lg jobben live</span>
+                        <span class="hiw-sub">F&oslash;lg status underveis i Min Garasje</span>
+                    </div>
                 </div>
-                <div class="step-item flex flex-col items-center text-center relative">
-                    <div class="step-circle w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center mb-3 shadow-md shadow-blue-600/20 relative z-10">
-                        <i class="fa-solid fa-road text-sm"></i>
+
+                <div class="hiw-step reveal reveal-delay-3">
+                    <div class="hiw-icon-wrap">
+                        <div class="hiw-icon"><i class="fa-solid fa-car-side"></i></div>
+                        <span class="hiw-num">4</span>
                     </div>
-                    <span class="text-slate-800 text-base md:text-sm font-semibold">Hent &amp; kj&oslash;r</span>
-                    <span class="text-slate-400 text-sm md:text-xs mt-1">Betaling p&aring; stedet eller Vipps</span>
+                    <div class="hiw-body">
+                        <span class="hiw-title">Hent &amp; betal</span>
+                        <span class="hiw-sub">Historikk p&aring; hva som er gjort lagres</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -600,10 +588,6 @@
 
         </div>
     </section>
-
-
-
-
 
 
     <!-- ============ TESTIMONIALS (Google Reviews) ============ -->
@@ -739,14 +723,14 @@
 
 
     <!-- ============ CONTACT / FOOTER ============ -->
-    <section id="contact" class="bg-slate-900 text-white">
+    <section id="contact" class="footer-dark text-white">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28">
             <div class="grid lg:grid-cols-2 gap-16">
                 <!-- Info -->
                 <div class="reveal">
                     <span class="text-blue-400 text-sm tracking-[0.3em] uppercase font-medium">Finn Oss</span>
                     <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold uppercase mt-3 mb-4">Ta Kontakt</h2>
-                    <p class="text-white/60 text-sm mb-8"><i class="fa-solid fa-calendar-check text-blue-400 mr-2"></i>Bestill time p&aring; telefon eller e-post &mdash; online booking kommer snart.</p>
+                    <p class="text-white/60 text-sm mb-8"><i class="fa-solid fa-calendar-check text-blue-400 mr-2"></i>Bestill time og deler gjennom v&aring;r bookingportal &mdash; f&oslash;lg status p&aring; jobben, historikk og dine biler inne i Min Garasje.</p>
                     <div class="rule-accent-white mb-10"></div>
 
                     <div class="space-y-8">
@@ -822,7 +806,7 @@
         <div class="border-t border-white/10">
             <div class="max-w-7xl mx-auto px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
                 <div>
-                    <span class="logo-text" style="font-size: 1rem; opacity: 0.6;">Bolli Motor</span>
+                    <span class="logo-text" style="font-size: 1rem; color:#fff; opacity: 0.55;">Bolli Motor</span>
                 </div>
                 <div class="text-center">
                     <p class="text-white/30 text-sm">&copy; 2026 Bolli Motor. Alle rettigheter reservert.</p>
@@ -841,15 +825,19 @@
     </section>
 
 
+    <!-- ============ LYS / MØRK MODUS ============ -->
+    <div class="theme-dock" id="themeDock">
+        <button class="theme-dock-btn" id="darkToggle" aria-label="Bytt til m&oslash;rkt tema"><i class="fa-solid fa-moon"></i></button>
+    </div>
+
+
     <!-- ============ SCRIPTS ============ -->
     <script>
         // Scroll progress bar + header
         const header = document.getElementById('header');
         const scrollProgress = document.getElementById('scrollProgress');
         window.addEventListener('scroll', () => {
-            // Header
             header.classList.toggle('header-scrolled', window.scrollY > 50);
-            // Scroll progress
             const scrolled = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
             scrollProgress.style.transform = `scaleX(${scrolled})`;
         }, { passive: true });
@@ -890,7 +878,6 @@
             });
         }, { threshold: 0.5 });
         document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
-
     </script>
 
 </body>
