@@ -173,8 +173,8 @@
         }
         @keyframes floatA { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
         @keyframes floatB { 0%,100% { transform: translateY(0); } 50% { transform: translateY(7px); } }
-        /* Alltid forankret nederst til venstre inne i bildet — samme relative plass uansett skjermbredde */
-        .hero-card-rating { bottom: 1.25rem; left: 1.25rem; padding: .8rem 1.05rem; animation: floatB 8.5s ease-in-out infinite; }
+        /* Forankret nederst til venstre, legger seg lett over bildekanten — samme plass uansett skjermbredde */
+        .hero-card-rating { bottom: 1.25rem; left: -1.25rem; padding: .8rem 1.05rem; animation: floatB 8.5s ease-in-out infinite; }
         .hero-card-icon {
             width: 2.4rem; height: 2.4rem; border-radius: 11px; flex-shrink: 0;
             display: flex; align-items: center; justify-content: center;
