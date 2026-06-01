@@ -9,8 +9,8 @@
     <link rel="canonical" href="https://bollimotor.no/om-oss">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/images/bollimotor-logo.png">
-    <link rel="apple-touch-icon" href="/images/bollimotor-logo.png">
+    <link rel="icon" type="image/png" href="images/bollimotor-logo.png">
+    <link rel="apple-touch-icon" href="images/bollimotor-logo.png">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
@@ -27,11 +27,17 @@
     <meta name="twitter:title" content="Om Oss | Bolli Motor">
     <meta name="twitter:description" content="Familieverksted p&aring; Lyngstad siden 1988.">
     <meta name="twitter:image" content="https://bollimotor.no/images/bollimotor-logo.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Temasystem: bruk lagret tema før første maling -->
+    <script src="theme.js"></script>
+    <link rel="stylesheet" href="theme.css">
+
     <script>
         tailwind.config = {
             theme: {
@@ -39,9 +45,13 @@
                     colors: {
                         midnight: '#0B1120',
                         'midnight-light': '#0f172a',
-                        slate: { accent: '#64748b', muted: '#94a3b8', soft: '#cbd5e1' },
-                        steel: '#e2e8f0',
-                        warm: '#f8fafc',
+                        blue: {
+                            100: 'rgb(var(--brand-100) / <alpha-value>)',
+                            400: 'rgb(var(--brand-400) / <alpha-value>)',
+                            500: 'rgb(var(--brand-500) / <alpha-value>)',
+                            600: 'rgb(var(--brand-600) / <alpha-value>)',
+                            700: 'rgb(var(--brand-700) / <alpha-value>)',
+                        },
                     },
                     fontFamily: {
                         display: ['Oswald', 'sans-serif'],
@@ -60,19 +70,9 @@
             text-transform: uppercase;
             letter-spacing: 0.08em;
             line-height: 1;
-            color: #0f172a;
             font-size: 1.65rem;
         }
-        .rule-accent { width: 60px; height: 3px; background: #2563eb; }
-        .btn-glow {
-            position: relative; overflow: hidden; transition: all 0.3s ease;
-        }
-        .btn-glow:hover { box-shadow: 0 8px 30px rgba(37, 99, 235, 0.3); }
-        .header-scrolled {
-            background: rgba(255, 255, 255, 0.97) !important;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 1px 20px rgba(0, 0, 0, 0.08);
-        }
+        .btn-glow { position: relative; overflow: hidden; transition: all 0.3s ease; }
         .mobile-nav { transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
         .mobile-nav.open { transform: translateX(0); }
         .gallery-item img { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -89,7 +89,6 @@
         .reveal-delay-3 { transition-delay: 0.3s; }
         .reveal-delay-4 { transition-delay: 0.4s; }
         .reveal-delay-5 { transition-delay: 0.5s; }
-        .rule-accent-white { width: 60px; height: 3px; background: #60a5fa; }
         .footer-some .some-fb:hover { background-color: #1877F2 !important; }
         .footer-some .some-ig:hover { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888) !important; }
         .footer-some a:hover i { color: white !important; }
@@ -98,23 +97,23 @@
         }
     </style>
 </head>
-<body class="bg-white text-midnight antialiased">
+<body class="text-midnight antialiased">
 
     <!-- Header -->
-    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-white shadow-sm">
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 shadow-sm">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <a href="/" class="group">
-                    <span class="logo-text">Bolli</span><span class="logo-text" style="color:#2563eb;font-weight:400;margin-left:0.2em;">Motor</span>
+                    <span class="logo-text">Bolli</span><span class="logo-text logo-accent" style="font-weight:400;margin-left:0.2em;">Motor</span>
                 </a>
                 <nav class="hidden lg:flex items-center gap-8">
                     <a href="/#services" class="text-slate-500 hover:text-slate-900 text-sm font-medium tracking-wide uppercase transition-colors">Tjenester</a>
                     <a href="om-oss.html" class="text-slate-900 text-sm font-medium tracking-wide uppercase transition-colors">Om Oss</a>
                     <a href="/#testimonials" class="text-slate-500 hover:text-slate-900 text-sm font-medium tracking-wide uppercase transition-colors">Omtaler</a>
                     <a href="/#contact" class="text-slate-500 hover:text-slate-900 text-sm font-medium tracking-wide uppercase transition-colors">Kontakt</a>
-                    <a href="/#contact" class="btn-glow bg-blue-600 text-white font-semibold text-sm px-6 py-2.5 rounded-lg uppercase tracking-wider hover:bg-blue-700 transition-colors">Bestill Time</a>
+                    <a href="/#min-garasje" class="btn-glow inline-flex items-center gap-1.5 bg-transparent text-blue-600 border border-blue-600 font-semibold text-xs px-4 py-2 rounded-lg uppercase tracking-wide hover:bg-blue-600 hover:text-white transition-colors"><i class="fa-solid fa-right-to-bracket text-[11px]"></i> Min Garasje</a>
                 </nav>
-                <button id="menuBtn" class="lg:hidden text-slate-900 text-2xl" aria-label="&Aring;pne meny">
+                <button id="menuBtn" class="lg:hidden text-2xl text-slate-900" aria-label="&Aring;pne meny">
                     <i class="fa-solid fa-bars"></i>
                 </button>
             </div>
@@ -124,11 +123,11 @@
     <!-- Mobile Nav -->
     <div id="mobileNav" class="mobile-nav fixed inset-0 z-[60] bg-slate-900 flex flex-col justify-center items-start gap-8 px-12">
         <button id="closeMenuBtn" class="absolute top-6 right-6 text-white text-3xl" aria-label="Lukk meny"><i class="fa-solid fa-xmark"></i></button>
-        <a href="/#services" class="mobile-link font-display text-white text-3xl uppercase tracking-widest hover:text-slate-muted transition-colors">Tjenester</a>
-        <a href="om-oss.html" class="mobile-link font-display text-white text-3xl uppercase tracking-widest hover:text-slate-muted transition-colors">Om Oss</a>
-        <a href="/#testimonials" class="mobile-link font-display text-white text-3xl uppercase tracking-widest hover:text-slate-muted transition-colors">Omtaler</a>
-        <a href="/#contact" class="mobile-link font-display text-white text-3xl uppercase tracking-widest hover:text-slate-muted transition-colors">Kontakt</a>
-        <a href="/#contact" class="mobile-link mt-4 btn-glow bg-blue-600 text-white font-bold text-lg px-10 py-4 rounded-full uppercase tracking-wider">Bestill Time</a>
+        <a href="/#services" class="mobile-link font-display text-white text-3xl uppercase tracking-widest transition-colors">Tjenester</a>
+        <a href="om-oss.html" class="mobile-link font-display text-white text-3xl uppercase tracking-widest transition-colors">Om Oss</a>
+        <a href="/#testimonials" class="mobile-link font-display text-white text-3xl uppercase tracking-widest transition-colors">Omtaler</a>
+        <a href="/#contact" class="mobile-link font-display text-white text-3xl uppercase tracking-widest transition-colors">Kontakt</a>
+        <a href="/#min-garasje" class="mobile-link mt-4 btn-glow inline-flex items-center gap-2 bg-transparent text-white border-2 border-blue-500 font-bold text-lg px-10 py-4 rounded-xl uppercase tracking-wider hover:bg-blue-600"><i class="fa-solid fa-right-to-bracket"></i> Min Garasje</a>
         <div class="flex gap-6 mt-8">
             <a href="https://www.facebook.com/profile.php?id=100054575164415" target="_blank" rel="noopener" class="w-12 h-12 rounded-full flex items-center justify-center" style="background-color: #1877F2;" aria-label="Facebook">
                 <i class="fa-brands fa-facebook-f text-white text-lg"></i>
@@ -219,7 +218,7 @@
     </section>
 
     <!-- ============ FOOTER ============ -->
-    <section class="bg-slate-900 text-white">
+    <section class="footer-dark text-white">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-20">
             <div class="grid md:grid-cols-3 gap-12">
                 <!-- Kontakt -->
@@ -250,7 +249,7 @@
                         <a href="/#services" class="hover:text-white transition-colors">Tjenester</a>
                         <a href="/#testimonials" class="hover:text-white transition-colors">Omtaler</a>
                         <a href="/#contact" class="hover:text-white transition-colors">Kontakt</a>
-                        <a href="/#contact" class="hover:text-white transition-colors">Bestill Time</a>
+                        <a href="/#min-garasje" class="hover:text-white transition-colors">Min Garasje</a>
                     </nav>
                 </div>
             </div>
@@ -259,7 +258,7 @@
         <div class="border-t border-white/10">
             <div class="max-w-7xl mx-auto px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
                 <div>
-                    <span class="logo-text" style="font-size: 1rem; opacity: 0.6;">Bolli Motor</span>
+                    <span class="logo-text" style="font-size: 1rem; color:#fff; opacity: 0.55;">Bolli Motor</span>
                 </div>
                 <p class="text-white/30 text-sm">&copy; 2026 Bolli Motor. Alle rettigheter reservert.</p>
                 <div class="footer-some flex gap-4">
@@ -273,6 +272,11 @@
             </div>
         </div>
     </section>
+
+    <!-- ============ LYS / MØRK MODUS ============ -->
+    <div class="theme-dock" id="themeDock">
+        <button class="theme-dock-btn" id="darkToggle" aria-label="Bytt til m&oslash;rkt tema"><i class="fa-solid fa-moon"></i></button>
+    </div>
 
     <script>
         const header = document.getElementById('header');
