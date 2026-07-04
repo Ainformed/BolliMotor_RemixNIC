@@ -43,7 +43,7 @@
     },
     {
       "source": "/min-garasje",
-      "destination": "https://app.verkstedpakken.no/c/bolli-motor-as",
+      "destination": "https://app.verkstedpakken.no/c/bolli-motor-as/min-garasje",
       "permanent": false
     }
   ]
